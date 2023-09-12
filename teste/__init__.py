@@ -18,17 +18,11 @@ from .db import create_user, find_user, verify_user
 # Criar uma função para criar a instância da aplicação
 def create_app(config_class=Config):
     app = Flask(__name__)
-
-    # Configurar as configurações globais da aplicação
     app.config.from_object(config_class)
 
-    # Configurar conexão com o Redis para armazenamento em cache
     redis = Redis.from_url(app.config['REDIS_URL'])
 
-    # Configurar conexão com o MongoDB usando as informações do arquivo de configuração
     client = MongoClient(app.config['MONGODB_SETTINGS']['host'])
-
-    # Selecionar o banco de dados padrão (no caso, 'Cluster0')
     db = client.get_default_database('Cluster0')
 
     # Rotas da aplicação e outras lógicas de negócio
