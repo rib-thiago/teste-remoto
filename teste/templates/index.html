@@ -1,0 +1,12 @@
+<!-- templates/index.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Bem-vindo ao teste de configuração do Redis e MongoDB com Flask!</h1>
+{% block msg %} {% include "msg.html" %} {% endblock %}
+
+<p>Escolha uma opção:</p>
+<a href="{{ url_for('test_redis') }}" class="btn btn-primary">Testar Redis</a>
+<a href="{{ url_for('test_mongodb') }}" class="btn btn-success">Testar MongoDB</a>
+
+{% endblock %}
