@@ -58,6 +58,58 @@ def create_app(config_class=Config):
             error_message = f'Erro na conexão com o MongoDB: {str(e)}'
             flash(error_message, 'danger')
         return redirect(url_for('index'))
-    
-    return app
 
+    @app.route('/login', methods=['GET', 'POST'])
+    def login():
+        if request.method == 'POST':
+            username = request.form.get('username')
+            password = request.form.get('password')
+
+            # Implemente a função de verificação de login (verifique se o usuário e a senha correspondem)
+            if verify_user(username, password):
+                flash('Login bem-sucedido!', 'success')
+
+                # Armazene o nome do usuário na sessão para rastrear a autenticação
+                session['username'] = username
+
+                return redirect(url_for('user_profile', username=username))
+            else:
+                flash('Credenciais inválidas. Tente novamente.', 'danger')
+
+        return render_template('login.html')
+
+    @app.route('/logout')
+    def logout():
+        # Remova o nome do usuário da sessão para fazer logout
+        session.pop('username', None)
+        flash('Logout bem-sucedido!', 'success')
+        return redirect(url_for('index'))
+
+    @app.route('/register', methods=['GET', 'POST'])
+    def register():
+        if request.method == 'POST':
+            username = request.form.get('username')
+            password = request.form.get('password')
+            if not username or not password:
+                flash('Por favor, preencha todos os campos.', 'danger')
+            elif create_user(username, password):
+                flash('Cadastro realizado com sucesso!', 'success')
+                return redirect(url_for('index'))
+            else:
+                flash(
+                    'Usuário já existe. Escolha um nome de usuário diferente.',
+                    'danger',
+                )
+        return render_template('register.html')
+
+    @app.route('/user/<username>')
+    def user_profile(username):
+        # Implemente a função para buscar os detalhes do usuário no banco de dados
+        user_data = find_user(username)
+        if user_data:
+            return render_template('user_profile.html', user=user_data)
+        else:
+            flash('Usuário não encontrado.', 'danger')
+            return redirect(url_for('login'))
+
+    return app

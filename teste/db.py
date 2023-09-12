@@ -65,4 +65,3 @@ def verify_user(username, password):
     if user and pswd:
         return user, pswd
     return None
-

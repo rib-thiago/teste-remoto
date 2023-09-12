@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Perfil do Usuário</h1>
+  {% block msg %} {% include "msg.html" %} {% endblock %}
+  <p>Bem-vindo, {{ user.username }}!</p>
+  <p>Detalhes do seu perfil:</p>
+  <ul>
+    <li><strong>Nome de Usuário:</strong> {{ user.username }}</li>
+    <!-- Adicione mais informações do perfil do usuário aqui -->
+  </ul>
+  <a href="{{ url_for('index') }}" class="btn btn-primary">Página Inicial</a>
+  <a href="{{ url_for('logout') }}" class="btn btn-danger">Sair</a>
+{% endblock %}
