@@ -20,4 +20,4 @@ plugins:
 - mkdocstrings:
     handlers:
       python:
-        paths: [notas_musicais]
+        paths: [teste]
