@@ -7,6 +7,21 @@ from werkzeug.security import check_password_hash, generate_password_hash
 
 
 def get_db():
+    """
+    Obtém uma conexão com o banco de dados MongoDB configurada no contexto do aplicativo Flask.
+
+    :return: Uma instância de banco de dados MongoDB.
+    :rtype: pymongo.database.Database
+
+    Exemplo de uso::
+
+        >>> from flask import Flask
+        >>> app = Flask(__name__)
+        >>> app.config['MONGODB_SETTINGS'] = {'host': 'mongodb://localhost:27017/'}
+        >>> with app.app_context():
+        ...     db = get_db()
+        ...     assert db is not None
+    """
     if 'db' not in g:
         client = MongoClient(current_app.config['MONGODB_SETTINGS']['host'])
         g.db = client.get_database('Cluster0')
