@@ -1,4 +1,4 @@
-site_name: Notas Musicais
+site_name: Conexão com Banco de Dados
 repo_url: https://github.com/rib-thiago/teste-remoto/
 repo_name: rib-thiago/teste-remoto/
 edit_uri: /tree/main/docs
@@ -6,3 +6,12 @@ edit_uri: /tree/main/docs
 theme:
   name: material
   language: pt-BR
+  logo: assets/database.png
+  favicon: assets/database.png
+
+
+markdown_extensions:
+  - attr_list
+
+extra_css:
+  - stylesheets/extra.css
