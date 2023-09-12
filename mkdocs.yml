@@ -1,0 +1,8 @@
+site_name: Notas Musicais
+repo_url: https://github.com/rib-thiago/notas-musicais
+repo_name: rib-thiago/notas-musicais
+edit_uri: /tree/main/docs
+
+theme:
+  name: material
+  language: pt-BR
